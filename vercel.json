@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "functions": {
+    "api/auth/signup.js": {
+      "runtime": "nodejs18.x"
+    },
+    "api/auth/login.js": {
+      "runtime": "nodejs18.x"
+    },
+    "api/user/me.js": {
+      "runtime": "nodejs18.x"
+    }
+  }
+}

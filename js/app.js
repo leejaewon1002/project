@@ -519,7 +519,7 @@ function initLogin() {
     const password = passwordInput.value;
 
     try {
-      const response = await apiCall("/auth/local/login", {
+      const response = await apiCall("/auth/login", {
         method: "POST",
         body: JSON.stringify({ id, password })
       });
@@ -555,7 +555,7 @@ function initLogin() {
     const passwordConfirm = confirmInput.value;
 
     try {
-      const response = await apiCall("/auth/local/signup", {
+      const response = await apiCall("/auth/signup", {
         method: "POST",
         body: JSON.stringify({ id, email, password, passwordConfirm })
       });
