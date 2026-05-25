@@ -1,4 +1,4 @@
-const { getUserById, requireAuth, updateUser, isSupabaseConfigured } = require("../_lib/auth");
+const { getUserById, requireAuth, updateUser, isSupabaseConfigured } = require("../../_lib/auth");
 
 module.exports = async function handler(req, res) {
   if (!isSupabaseConfigured()) {
