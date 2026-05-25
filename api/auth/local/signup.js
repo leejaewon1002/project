@@ -1,4 +1,4 @@
-const { createUser, findUserByLogin, signToken, ensureSupabase, isSupabaseConfigured } = require("../../_lib/auth");
+const { createUser, findUserByLogin, signToken, ensureSupabase, isSupabaseConfigured } = require("../../../lib/auth");
 
 module.exports = async function handler(req, res) {
   if (req.method !== "POST") {
