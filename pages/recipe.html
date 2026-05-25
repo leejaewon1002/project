@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meal Fit | 레시피 상세</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+</head>
+<body>
+  <div class="grain"></div>
+  <header class="topbar">
+    <a class="brand" href="../index.html"><span class="brand-icon">🥬</span><span>Meal Fit</span></a>
+    <nav class="nav">
+      <a href="login.html">로그인/회원가입</a>
+      <a href="search.html">레시피 검색</a>
+      <a class="active" href="recommend.html">메뉴추천</a>
+      <a href="ingredients.html">재료관리</a>
+      <a href="settings.html">설정</a>
+    </nav>
+  </header>
+
+  <main class="page">
+    <section class="panel">
+      <p class="eyebrow">레시피</p>
+      <h1 id="detailTitle" style="font-size:2.2rem;">레시피 상세</h1>
+      <p id="detailAiNote" class="notice" style="margin:10px 0 16px;">AI 검색 결과를 반영해 메뉴별 상세 정보를 불러오는 중입니다.</p>
+      <div class="row">
+        <article class="panel" style="margin:0;">
+          <h3>재료목록</h3>
+          <ul id="detailIngredients" class="list"></ul>
+        </article>
+        <article class="panel" style="margin:0;">
+          <h3>예상 비용</h3>
+          <p id="detailPrice" class="price" style="font-size:1.6rem; margin-top:8px;">약 0원</p>
+          <p id="detailPriceMeta" style="color:#5b6556;">메뉴별 AI 분석 가격을 계산 중입니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="grid-two">
+      <article class="panel">
+        <h2>조리방법</h2>
+        <ol id="detailSteps" class="list" style="padding-left:22px;"></ol>
+      </article>
+      <article class="panel">
+        <h2>대체재료 추천</h2>
+        <ul id="detailSubs" class="list"></ul>
+        <a class="btn" style="margin-top:10px;" href="ingredients.html">재료 등록하러 가기</a>
+      </article>
+    </section>
+  </main>
+  <script src="../js/app.js"></script>
+</body>
+</html>
