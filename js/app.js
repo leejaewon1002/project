@@ -24,7 +24,30 @@ const getDefaultBackendOrigin = () => {
   return `${protocol}//${hostname}${port ? `:${port}` : ""}`;
 };
 
-const API_BASE_URL = `${getDefaultBackendOrigin()}/api`;
+const BACKEND_URL_STORAGE_KEY = "mealfit_backend_url";
+
+const normalizeBackendOrigin = (value) => {
+  if (!value) return "";
+  return String(value).trim().replace(/\/+$/, "");
+};
+
+const getConfiguredBackendOrigin = () => {
+  if (typeof window === "undefined") return "";
+
+  const fromGlobal = normalizeBackendOrigin(window.MEALFIT_BACKEND_URL || window.__MEALFIT_BACKEND_URL__);
+  if (fromGlobal) return fromGlobal;
+
+  try {
+    const fromStorage = normalizeBackendOrigin(window.localStorage.getItem(BACKEND_URL_STORAGE_KEY));
+    if (fromStorage) return fromStorage;
+  } catch (error) {
+    // localStorage may be unavailable in some preview contexts.
+  }
+
+  return "";
+};
+
+const API_BASE_URL = `${getConfiguredBackendOrigin() || getDefaultBackendOrigin()}/api`;
 
 const recipes = [
   { name: "김치제육볶음", price: 7000, category: "간편요리", icon: "🍲" },
@@ -93,14 +116,32 @@ const apiCall = async (endpoint, options = {}) => {
       }
     });
 
-    const data = await response.json();
+    const contentType = response.headers.get("content-type") || "";
+    const rawBody = await response.text();
+    let data = null;
+
+    if (rawBody) {
+      if (contentType.includes("application/json")) {
+        try {
+          data = JSON.parse(rawBody);
+        } catch (parseError) {
+          throw new Error("서버가 JSON 형식이 아닌 응답을 반환했습니다. 백엔드 URL을 확인해주세요.");
+        }
+      } else {
+        const preview = rawBody.slice(0, 120).replace(/\s+/g, " ").trim();
+        throw new Error(
+          `API 응답이 JSON이 아닙니다. 현재 요청 주소(${url})가 백엔드가 아니라 정적 페이지 또는 404 페이지를 가리키고 있습니다. ` +
+          `백엔드 URL을 확인해주세요. 응답 미리보기: ${preview || "(empty)"}`
+        );
+      }
+    }
 
     if (!response.ok) {
       if (response.status === 401) {
         clearToken();
         window.location.href = "pages/login.html";
       }
-      throw new Error(data.message || "API 요청 실패");
+      throw new Error((data && data.message) || `API 요청 실패 (${response.status})`);
     }
 
     return data;
@@ -478,7 +519,7 @@ function initLogin() {
     const password = passwordInput.value;
 
     try {
-      const response = await apiCall("/auth/login", {
+      const response = await apiCall("/auth/local/login", {
         method: "POST",
         body: JSON.stringify({ id, password })
       });
@@ -514,7 +555,7 @@ function initLogin() {
     const passwordConfirm = confirmInput.value;
 
     try {
-      const response = await apiCall("/auth/signup", {
+      const response = await apiCall("/auth/local/signup", {
         method: "POST",
         body: JSON.stringify({ id, email, password, passwordConfirm })
       });
@@ -945,6 +986,61 @@ function initSettings() {
       })
       .catch(console.error);
   }
+
+  // 계정 정보 요약 및 로그아웃/계정삭제 동작 연결
+  const accountSummary = document.getElementById("settingsAccountSummary");
+  const settingsLogoutBtn = document.getElementById("settingsLogoutBtn");
+  const settingsDeleteBtn = document.getElementById("settingsDeleteBtn");
+
+  const renderAccountSummary = async () => {
+    if (!accountSummary) return;
+    if (!getToken()) {
+      accountSummary.innerHTML = '<p class="notice">로그인이 필요합니다. <a href="login.html">로그인</a></p>';
+      return;
+    }
+
+    try {
+      const resp = await apiCall("/user/me");
+      const u = resp.user;
+      accountSummary.innerHTML = `
+        <article class="account-summary-card">
+          <h3>계정 정보</h3>
+          <div class="account-summary-grid">
+            <div><strong>아이디</strong><span>${escapeHtml(u.id || "SNS 가입 사용자")}</span></div>
+            <div><strong>이메일</strong><span>${escapeHtml(u.email || "미입력")}</span></div>
+            <div><strong>이름</strong><span>${escapeHtml(u.name || "미입력")}</span></div>
+          </div>
+        </article>
+      `;
+    } catch (e) {
+      console.error("설정 계정 정보 로드 실패:", e);
+      accountSummary.innerHTML = '<p class="notice">로그인된 계정 정보를 불러올 수 없습니다.</p>';
+    }
+  };
+
+  if (settingsLogoutBtn) {
+    settingsLogoutBtn.addEventListener("click", () => {
+      clearToken();
+      window.location.href = "login.html";
+    });
+  }
+
+  if (settingsDeleteBtn) {
+    settingsDeleteBtn.addEventListener("click", async () => {
+      if (!confirm("정말 계정을 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.")) return;
+      try {
+        await apiCall("/user/me", { method: "DELETE" });
+        clearToken();
+        alert("계정이 삭제되었습니다.");
+        window.location.href = "index.html";
+      } catch (err) {
+        console.error("계정 삭제 실패:", err);
+        alert("계정 삭제에 실패했습니다: " + err.message);
+      }
+    });
+  }
+
+  renderAccountSummary();
 }
 
 // ============================================

@@ -26,6 +26,43 @@ npm install
 npm start
 ```
 
+Vercel에 배포하면 이 저장소의 `api/` 함수가 백엔드 역할을 하므로, 같은 도메인에서 로그인/회원가입이 동작합니다. 별도 백엔드로 분리해서 쓰고 싶다면 프론트가 그 주소를 우선 사용하도록 `window.MEALFIT_BACKEND_URL` 또는 브라우저 `localStorage`의 `mealfit_backend_url` 값을 설정할 수 있습니다.
+
+예시:
+
+```html
+<script>
+  window.MEALFIT_BACKEND_URL = "https://your-backend-domain.com";
+</script>
+```
+
+또는 브라우저 콘솔에서 한 번:
+
+```js
+localStorage.setItem("mealfit_backend_url", "https://your-backend-domain.com");
+```
+
+백엔드를 배포할 때는 `FRONTEND_URL`에 프런트 주소를 넣어 CORS를 허용하세요. 여러 주소를 쓰는 경우 쉼표로 구분할 수 있습니다.
+
+예시:
+
+```env
+FRONTEND_URL=https://project-three-nu-98.vercel.app,http://localhost:5500
+BACKEND_URL=https://your-backend-domain.com
+```
+
+Vercel 프로젝트 환경 변수에는 최소한 아래 값도 넣어주세요.
+
+```env
+SUPABASE_URL=...
+SUPABASE_SERVICE_ROLE_KEY=...
+JWT_SECRET=...
+```
+
+MongoDB를 쓸 경우에는 `MONGODB_URI`를 대신 설정하면 됩니다.
+
+별도 백엔드를 쓸 때는 프론트에 `window.MEALFIT_BACKEND_URL = "https://your-backend-domain.com";`를 넣거나, 브라우저에서 `localStorage.setItem("mealfit_backend_url", "https://your-backend-domain.com")`를 한 번 실행하면 됩니다.
+
 ## 구현된 기능
 
 - 로그인/회원가입: 로컬 계정 생성 및 로그인

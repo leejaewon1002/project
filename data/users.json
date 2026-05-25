@@ -1,0 +1,138 @@
+[
+  {
+    "id": "cliuser",
+    "username": "cliuser",
+    "email": "cliuser@example.com",
+    "password": "$2a$10$bkSHC/U4WCatXNx65zwQ8.gCfWKoaWCR6xFJFvNMe3kpDear52RrC",
+    "name": "cli",
+    "avatar": "",
+    "loginType": "password",
+    "lastLogin": "2026-05-25T02:49:41.151Z",
+    "settings": {
+      "monthlyBudget": 50000,
+      "preferredCategories": [],
+      "preferredDietary": []
+    },
+    "ingredients": [],
+    "shopping": []
+  },
+  {
+    "id": "testuser3",
+    "username": "testuser3",
+    "email": "test3@example.com",
+    "password": "$2a$10$jIGHc0Fi37V1HMxFVfDYnenQyboIxLxjEq7Sw8ko/bgHYsKwiUbl2",
+    "name": "t3",
+    "avatar": "",
+    "loginType": "password",
+    "lastLogin": "2026-05-25T02:50:53.693Z",
+    "settings": {
+      "monthlyBudget": 50000,
+      "preferredCategories": [],
+      "preferredDietary": []
+    },
+    "ingredients": [],
+    "shopping": []
+  },
+  {
+    "id": "localuser6",
+    "username": "localuser6",
+    "email": "local6@example.com",
+    "password": "$2a$10$/Uu4kqaoJ4GQo8bFELvMYuv6ZM9U8EEwDIaKFwXK11EEDINCTElw.",
+    "name": "localuser6",
+    "avatar": "",
+    "loginType": "password",
+    "lastLogin": "2026-05-25T03:13:14.594Z",
+    "settings": {
+      "monthlyBudget": 50000,
+      "preferredCategories": [],
+      "preferredDietary": []
+    },
+    "ingredients": [],
+    "shopping": []
+  },
+  {
+    "id": "mealfit",
+    "username": "mealfit",
+    "email": "example222@gmail.com",
+    "password": "$2a$10$CXmfwg5x6zmXgPGB8.AniezSuisAvzZbe0g45uUYIYjfVA0Nmmfnm",
+    "name": "mealfit",
+    "avatar": "",
+    "loginType": "password",
+    "lastLogin": "2026-05-25T04:21:02.366Z",
+    "settings": {
+      "monthlyBudget": 50000,
+      "preferredCategories": [],
+      "preferredDietary": []
+    },
+    "ingredients": [],
+    "shopping": []
+  },
+  {
+    "id": "infoTester",
+    "username": "infoTester",
+    "email": "infotester@example.com",
+    "password": "$2a$10$7IDWXvG3NGN9OxhcgSzl3uPVFoBWY672sOuzac/siPWPLzzKBmaya",
+    "name": "infoTester",
+    "avatar": "",
+    "loginType": "password",
+    "lastLogin": "2026-05-25T03:16:42.724Z",
+    "settings": {
+      "monthlyBudget": 50000,
+      "preferredCategories": [],
+      "preferredDietary": []
+    },
+    "ingredients": [],
+    "shopping": []
+  },
+  {
+    "id": "infoTester2",
+    "username": "infoTester2",
+    "email": "infotester2@example.com",
+    "password": "$2a$10$0seN2YbX3LsPJ7R3wV/EMuuDrN1ZKbAC4MsZh.qir5yGj5gr88t4O",
+    "name": "infoTester2",
+    "avatar": "",
+    "loginType": "password",
+    "lastLogin": "2026-05-25T03:17:02.290Z",
+    "settings": {
+      "monthlyBudget": 50000,
+      "preferredCategories": [],
+      "preferredDietary": []
+    },
+    "ingredients": [],
+    "shopping": []
+  },
+  {
+    "id": "infoTester3",
+    "username": "infoTester3",
+    "email": "infotester3@example.com",
+    "password": "$2a$10$CCzaL72yk6BnfNyGDUOn3.227aEaUkCNdO7YbfKtyhMUQaHKn0QyS",
+    "name": "infoTester3",
+    "avatar": "",
+    "loginType": "password",
+    "lastLogin": "2026-05-25T03:18:28.618Z",
+    "settings": {
+      "monthlyBudget": 50000,
+      "preferredCategories": [],
+      "preferredDietary": []
+    },
+    "ingredients": [],
+    "shopping": []
+  },
+  {
+    "id": "infoTester4",
+    "username": "infoTester4",
+    "email": "infotester4@example.com",
+    "password": "$2a$10$AUpuEZmEKsOrb3XwdYcigOYmW0RyHBvfw.9bjmv5r8lP4oprpkEi6",
+    "name": "infoTester4",
+    "avatar": "",
+    "loginType": "password",
+    "lastLogin": "2026-05-25T03:19:53.434Z",
+    "settings": {
+      "monthlyBudget": 50000,
+      "preferredCategories": [],
+      "preferredDietary": []
+    },
+    "ingredients": [],
+    "shopping": []
+  }
+]
